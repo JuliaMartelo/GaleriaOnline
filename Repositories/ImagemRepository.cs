@@ -6,9 +6,6 @@ using Microsoft.EntityFrameworkCore;
 namespace GaleriaOnline.WebApi.Repositories
 {
 
-   
-
-
     public class ImagemRepository : IImagemRepository
     {
         private readonly GaleriaOnlineDbContext _context;
@@ -45,9 +42,10 @@ namespace GaleriaOnline.WebApi.Repositories
             return await _context.Imagens.FindAsync(id);
         }
 
-        public Task<bool> UpdateAsync(Imagem imagem)
+        public async Task<bool> UpdateAsync(Imagem imagem)
         {
-            throw new NotImplementedException();
+            _context.Imagens.Update(imagem);
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 
